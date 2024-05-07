@@ -1,6 +1,6 @@
 import { ObjectId } from "mongoose"
 
-export interface Room{
+export interface IRoom {
     id: ObjectId,
     number: number,
     type: string,

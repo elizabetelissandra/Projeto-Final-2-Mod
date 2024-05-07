@@ -14,5 +14,8 @@ import { IBooking } from "../entities/Booking";
 const bookingSchema = new mongoose.Schema<IBooking>({
     checkin_date: { type: Date, default: Date.now},
     checkout_date: { type: Date, default: Date.now },
-    gests: {type: Number}
+    gests: {type: Number},
+    id_room: { type: mongoose.Types.ObjectId}
 })
+
+export const Booking = mongoose.model("Booking", bookingSchema);
