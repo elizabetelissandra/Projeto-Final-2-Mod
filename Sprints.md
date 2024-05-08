@@ -5,9 +5,9 @@ Sprint inicial
  [x] Criação de repositório no Github
  [x] Configurações de Banco de Dados
  [x] Criação de um servidor básico no Express
- [ ] Criação do middleware de validação
- [ ] Criar entidades (interfaces)
- [ ] Criar models
+ [x] Criação do middleware de validação
+ [x] Criar entidades (interfaces)
+ [x] Criar models
  [ ] 1. Cadastro do Hóspede - POST /guests
          - Criptografar a senha (Provider de criptografia)
  [ ] 2. Login do Hóspede - POST /guests/auth
