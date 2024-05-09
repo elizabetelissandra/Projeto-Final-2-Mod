@@ -17,3 +17,8 @@ export interface IGuestDTO{
     email: string
     password: string
 }
+
+export interface IGuestLogin{
+    email: string
+    password: string
+}

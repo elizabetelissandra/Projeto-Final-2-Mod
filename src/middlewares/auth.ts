@@ -25,7 +25,7 @@ export function auth(
     return res.status(401).send({ error: 'Token error!' })
   }
 
-  jwt.verify(token, authConfig.secret, (error, decoded) => {
+  jwt.verify(token, authConfig.secret, (error: any, decoded: any) => {
     if (error || !decoded) {
       return res.status(401).send({ error: 'Invalid Token!' })
     }
