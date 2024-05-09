@@ -8,7 +8,7 @@ Sprint inicial
  [x] Criação do middleware de validação
  [x] Criar entidades (interfaces)
  [x] Criar models
- [ ] 1. Cadastro do Hóspede - POST /guests
+ [x] 1. Cadastro do Hóspede - POST /guests
          - Criptografar a senha (Provider de criptografia)
  [ ] 2. Login do Hóspede - POST /guests/auth
          - Comparar senhas criptografada com senha da requisição

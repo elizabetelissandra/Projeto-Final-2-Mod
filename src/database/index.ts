@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
+import { databaseConfig } from "../config/databaseConfig";
 
-mongoose.connect('mongodb+srv://elizabetelissandrasilva:admin@cluster0.umywj9z.mongodb.net/ProjetoFinalMod2')
+mongoose.connect(databaseConfig.uri)
 
 export { mongoose }
