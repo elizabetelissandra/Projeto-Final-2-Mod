@@ -12,6 +12,11 @@ export class GuestRepository {
         this.usuarioModel = usuarioModel
 }
 
+async getByEmail(email: string) {
+    const guest = await this.guestModel.findOne({ email })
+    return guest
+}
+
 async cadastroHospede(guestData: IGuestDTO): Promise<IGuest>{
     return this.guestModel.create(guestData)
 }
