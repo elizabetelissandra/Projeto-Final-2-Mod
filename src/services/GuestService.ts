@@ -18,7 +18,6 @@ async createGuest(params: ParamsCreateGuestDTO){
         } catch (error) {
             
         }
-      
     }
     const payload = {
         ...params,

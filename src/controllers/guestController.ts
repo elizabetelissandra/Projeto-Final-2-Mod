@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
+import * as yup from "yup"
+
 import { GuestRepository } from "../repositories/GuestRepository";
 import { GuestService } from "../services/GuestService";
-import { guestModel } from "../entities/Guest";
-import * as yup from "yup"
+import { StatusCode } from "../utils/statusCodes";
+
 import { mongoose } from "../database";
 
 
@@ -12,7 +14,9 @@ const guestService = new GuestService(guestRepository)
 export async function createGuestController(
     req: Request, res: Response
 ){
-    const guestSchema = new mongoose.Schema({
+    try{
+    const {body} = req
+    const bodyValidator = yup.object().shape({
         name: yup.string().required(),
         cpf: yup.number().required(),
         phone_number:  yup.number().min(8),
@@ -20,11 +24,15 @@ export async function createGuestController(
         password: yup.string().min(8).required()
     })
 
-    const { name, cpf, phone_number, email, password } = req.body;
-    try{
-        const guest = await guestService.createGuest({name, cpf, phone_number, email, password})
-        return res.status(201).send({guest})
+    await bodyValidator.validate(body)
+
+    const result = await guestService.createGuest(body)
+
+    return res.status(StatusCode.CREATED).send(result)
     }catch(error: any){
-        res.status(400).send({message: error.message})
+        if(error.message === "Hóspede já existe"){
+           return res.status(StatusCode.CONFLICT).send({ message: error.message}) 
+        }
+        return res.status(StatusCode.BAD_REQUEST).send({message: error.message})
     }
 }

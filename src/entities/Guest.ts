@@ -1,18 +1,24 @@
-import { string } from "yup";
-import { mongoose } from "../database";
+import mongoose, { Schema, Document } from "mongoose";
 
+export interface IGuest extends Document {
+  name: string;
+  cpf: string;
+  phone_number: number;
+  email: string;
+  password: string;
+  bookings: mongoose.Types.ObjectId[];
+}
 
-const guestSchema = new mongoose.Schema({
-    name: { Type: string },
-    cpf: { Type: string },
-    phone_number: { Type: number },
-    email: {
-        Type: string
-        , unique: true
-    },
-    password: { type: string },
-    bookings: { type: [mongoose.Types.ObjectId], ref: "Booking"}, 
-    timestamps: true
-})
+const guestSchema: Schema = new Schema({
+  name: { type: String },
+  cpf: { type: String },
+  phone_number: { type: Number },
+  email: {
+    type: String,
+    unique: true
+  },
+  password: { type: String },
+  bookings: [{ type: mongoose.Types.ObjectId, ref: "Booking" }]
+}, { timestamps: true });
 
-export const guestModel = mongoose.model("Guest", guestSchema)
+export const GuestModel = mongoose.model<IGuest>("Guest", guestSchema);

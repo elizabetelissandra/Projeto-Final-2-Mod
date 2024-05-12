@@ -1,16 +1,16 @@
 import { ParamsCreateGuestDTO } from "../dtos/createGuestDto";
-import { guestModel } from "../entities/Guest";
+import { GuestModel } from "../entities/Guest";
 
  
 
 export class GuestRepository {
     async getByEmail(email: string) {
-        const guest = await guestModel.findOne({ email })
+        const guest = await GuestModel.findOne({ email })
         return guest
 }
 
 async createGuest(params: ParamsCreateGuestDTO){
-    const guest = await guestModel.create(params)
+    const guest = await GuestModel.create(params)
     return guest
 }
 

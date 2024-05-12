@@ -1,5 +1,8 @@
 import {Router} from 'express'
+import { guestRoutes } from './guestRoutes'
 
 const routes = Router()
 
-export default routes
+routes.use("/guests", guestRoutes)
+
+export {routes}
