@@ -5,3 +5,4 @@ export interface ParamsCreateGuestDTO {
   email: string,
   password: string
   }
+

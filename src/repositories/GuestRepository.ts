@@ -14,6 +14,8 @@ async createGuest(params: ParamsCreateGuestDTO){
     return guest
 }
 
-// async loginHospede(guestData: IGuestLogin):
-// Promise<IGuest>{}
+async getById(id: string){
+    const guest = await GuestModel.findById(id)
+    return guest
+}
 }
