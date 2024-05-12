@@ -1,24 +1,18 @@
-import mongoose from "mongoose"
+import { string } from "yup";
+import { mongoose } from "../database";
 
-export interface IGuest{
-    id: string
-    name: string
-    cpf: string
-    phone_number: number
-    email: string
-    password: string
-    bookings: Array<mongoose.Types.ObjectId>
-}
 
-export interface IGuestDTO{
-    name: string
-    cpf: string
-    phone_number: number
-    email: string
-    password: string
-}
+const guestSchema = new mongoose.Schema({
+    name: { Type: string },
+    cpf: { Type: string },
+    phone_number: { Type: number },
+    email: {
+        Type: string
+        , unique: true
+    },
+    password: { type: string },
+    bookings: { type: [mongoose.Types.ObjectId], ref: "Booking"}, 
+    timestamps: true
+})
 
-export interface IGuestLogin{
-    email: string
-    password: string
-}
+export const guestModel = mongoose.model("Guest", guestSchema)

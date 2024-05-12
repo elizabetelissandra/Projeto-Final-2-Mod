@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
-import { IGuest, IGuestDTO } from "../entities/Guest";
 import { GuestRepository } from "../repositories/GuestRepository";
 import { ParamsCreateGuestDTO } from '../dtos/createGuestDto';
+
 
 
 export class GuestService{
@@ -10,17 +10,22 @@ export class GuestService{
         this.guestRepository = repository;
     }
 
-async criarHospede(params: ParamsCreateGuestDTO): Promise<IGuest>{
-    const guestAlreadyExists  = await this.guestRepository.getByEmail(params)
+async createGuest(params: ParamsCreateGuestDTO){
+    const guestAlreadyExists  = await this.guestRepository.getByEmail(params.email)
     if(guestAlreadyExists){
-        //lancar erro
+        try {
+            throw new Error("Hospede já existe")
+        } catch (error) {
+            
+        }
+      
     }
     const payload = {
         ...params,
-        password: await bcrypt.hash()
+        password: await bcrypt.hash(params.password, 8)
     }
 
-    return this.guestRepository.cadastroHospede(guestData)
+    await this.guestRepository.createGuest(payload)
 }
 
 }

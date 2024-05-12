@@ -1,5 +1,7 @@
 export interface ParamsCreateGuestDTO {
-    fullname: string
-    email: string
-    password: string
+  name: string,
+  cpf: number,
+  phone_number: number,
+  email: string,
+  password: string
   }
