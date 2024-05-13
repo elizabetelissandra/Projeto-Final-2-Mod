@@ -4,7 +4,8 @@ import { GuestModel } from "../entities/Guest";
  
 
 export class GuestRepository {
-    async getByEmail(email: string) {
+    
+async getByEmail(email: string) {
         const guest = await GuestModel.findOne({ email })
         return guest
 }

@@ -1,10 +1,13 @@
 import {Router} from 'express'
+
+
 import { guestRoutes } from './guestRoutes'
-import { loginController } from '../controllers/LoginController'
+import { adminRoutes } from './adminRoutes'
 
 const routes = Router()
 
 routes.use("/guests", guestRoutes)
-routes.use("/login", loginController)
+routes.use("/admin", adminRoutes)
+
 
 export {routes}

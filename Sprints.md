@@ -10,11 +10,11 @@ Sprint inicial
  [x] Criar models
  [x] 1. Cadastro do Hóspede - POST /guests
          - Criptografar a senha (Provider de criptografia)
- [ ] 2. Login do Hóspede - POST /guests/auth
+ [x] 2. Login do Hóspede - POST /guests/auth
          - Comparar senhas criptografada com senha da requisição
          - Utilizar JWT (Provider de Token)
          - Como diferenciar um token de hóspede de um token de gerente? 🤔
- [ ] 3. Login de Gerente - POST /admin/auth
+ [x] 3. Login de Gerente - POST /admin/auth
          - Cadastrar um gerente no banco de dados
          - Vale a pena ter dois middleware diferentes pra algo tão parecido??? 🤔
 ```
