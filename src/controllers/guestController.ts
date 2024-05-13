@@ -1,10 +1,6 @@
 import { Request, Response } from "express";
 import * as yup from "yup"
-import { GuestRepository } from "../repositories/GuestRepository";
-
 import { StatusCode } from "../utils/statusCodes";
-
-import { mongoose } from "../database";
 import { GuestService } from "../services/GuestService";
 
 export class GuestController{

@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { GuestRepository } from "../repositories/GuestRepository";
+import { GuestRepository } from "../repositories/guestRepository";
 import { InputLoginDTO, OutputLoginDTO } from "../dtos/loginDTO";
 import { ParamsCreateGuestDTO } from "../dtos/createGuestDto";
 

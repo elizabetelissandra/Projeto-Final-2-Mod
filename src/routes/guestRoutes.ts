@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { GuestController } from '../controllers/guestController';
-import { GuestRepository } from '../repositories/GuestRepository';
+import { GuestRepository } from '../repositories/guestRepository';
 import { GuestService } from '../services/GuestService';
 
 const repository = new GuestRepository
