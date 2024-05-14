@@ -11,5 +11,4 @@ export class Database{
     }
 }
 
-
-export { mongoose }
+export { mongoose };

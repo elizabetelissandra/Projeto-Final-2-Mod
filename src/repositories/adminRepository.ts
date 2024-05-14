@@ -1,11 +1,18 @@
+import { InputLoginDTO } from "../dtos/loginDTO";
 import { IAdmin, AdminModel } from "../entities/Admin";
 
 export class AdminRepository{
-    async createAdmin(email: string, password: string): Promise<IAdmin>{
-        return await AdminModel.create({email, password})
+    async createAdmin(input: InputLoginDTO): Promise<IAdmin | null>{
+        return await AdminModel.create(input)
+        
     }
 
     async getByEmail(email: string): Promise<IAdmin | null>{
         return await AdminModel.findOne({email})
+    }
+
+    async getById(id: string): Promise<IAdmin | null>{
+        const admin = await AdminModel.findById(id)
+        return admin
     }
 }

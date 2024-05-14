@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { InputLoginDTO, OutputLoginDTO } from "../dtos/loginDTO";
 import { AdminRepository } from "../repositories/adminRepository";
+import { AdminModel } from "../entities/Admin";
 
 
 
@@ -34,14 +35,17 @@ export class AdminService {
     return { token };
   }
 
-  async registerAdmin(email: string, password: string): Promise<void>{
+  async registerAdmin(email: string, password: string){
     const existingAdmin = await this.repository.getByEmail(email)
     if(existingAdmin){
       throw new Error('Email já cadastrado como gerente')
     }
   
     const hashedPassword = await bcrypt.hash(password, 8)
+
+    const admin = this.repository.createAdmin({email, password: hashedPassword})
   
-    await this.repository.createAdmin(email, hashedPassword)
+    return admin
+
   }
 }

@@ -1,4 +1,6 @@
-import mongoose, { Schema, ObjectId } from "mongoose";
+import  { Schema, ObjectId } from "mongoose";
+import { mongoose } from "../database";
+
 
 export interface IRoom {
   id: ObjectId;
