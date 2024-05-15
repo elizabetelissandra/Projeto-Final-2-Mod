@@ -1,7 +1,7 @@
 import { InputLoginDTO } from "../dtos/loginDTO";
 import { IAdmin, AdminModel } from "../entities/Admin";
 
-export class AdminRepository{
+export class adminRepository{
     async createAdmin(input: InputLoginDTO): Promise<IAdmin | null>{
         return await AdminModel.create(input)
         

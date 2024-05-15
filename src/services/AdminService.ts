@@ -1,15 +1,17 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { InputLoginDTO, OutputLoginDTO } from "../dtos/loginDTO";
-import { AdminRepository } from "../repositories/adminRepository";
-import { AdminModel } from "../entities/Admin";
+import { adminRepository } from "../repositories/adminRepository";
+import { IAdmin } from "../entities/Admin";
+import { AuthMapper, IToApi } from "../utils/mappers/AuthMapper";
+import { authConfig } from "../config/auth";
 
 
 
 export class AdminService {
-  constructor(private repository: AdminRepository) {}
+  constructor(private repository: adminRepository) {}
 
-  async loginAdmin(params: InputLoginDTO): Promise<OutputLoginDTO> {
+  async loginAdmin(params: InputLoginDTO){
     const admin = await this.repository.getByEmail(params.email);
     if (!admin) {
       throw new Error("Email ou senha incorretos");
@@ -23,16 +25,13 @@ export class AdminService {
       throw new Error("Email ou senha incorretos");
     }
 
-    const token = jwt.sign(
-      {
-        id: admin.id,
-        email: admin.email,
-        role: "admin"
-      },
-      process.env.SECRET_KEY as string,
-      { expiresIn: "5m" }
-    );
-    return { token };
+    const payload = {...AuthMapper.toApi(admin as any as IToApi)}
+    const secretKey = authConfig.secret
+    const options = {expiresIn: '1h'}
+
+    const token = jwt.sign(payload, secretKey, options)
+
+    return {token, IAdmin: AuthMapper.toApi(admin as any as IToApi)}
   }
 
   async registerAdmin(email: string, password: string){

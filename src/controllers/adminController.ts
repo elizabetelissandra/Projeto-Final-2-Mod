@@ -3,10 +3,10 @@ import * as yup from "yup";
 
 import { StatusCode } from "../utils/statusCodes";
 import { AdminService } from "../services/AdminService";
-import { AdminRepository } from "../repositories/adminRepository";
+import { adminRepository } from "../repositories/adminRepository";
 
-const adminRepository = new AdminRepository();
-const service = new AdminService(adminRepository);
+const Repository = new adminRepository();
+const service = new AdminService(Repository);
 
 export class adminController {
   constructor(service: AdminService) {}

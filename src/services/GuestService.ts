@@ -29,7 +29,7 @@ export class GuestService {
         role: "guest"
       },
       process.env.SECRET_KEY as string,
-      { expiresIn: "5m" }
+      { expiresIn: "10m" }
     );
     return { token };
   }

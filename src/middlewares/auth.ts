@@ -1,37 +1,40 @@
-import { type Request, type Response, type NextFunction } from 'express'
-import jwt from 'jsonwebtoken'
-import { authConfig } from '../config/auth'
+import { type Request, type Response, type NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import { authConfig } from "../config/auth";
+import { AdminModel } from "../entities/Admin";
 
-export function auth(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Response<any, Record<string, any>> | undefined {
-  const authHeader = req.headers.authorization
+type JwtPayload = {
+  id: string;
+};
 
-  if (!authHeader) {
-    return res.status(401).send({ error: 'No token provided!' })
-  }
+export async function auth(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authHeader = req.headers.authorization;
 
-  const tokenParts = authHeader.split(' ')
-
-  if (tokenParts.length !== 2) {
-    return res.status(401).send({ error: 'Token error!' })
-  }
-
-  const [tokenSchema, token] = tokenParts
-
-  if (tokenSchema !== 'Bearer') {
-    return res.status(401).send({ error: 'Token error!' })
-  }
-
-  jwt.verify(token, authConfig.secret, (error: any, decoded: any) => {
-    if (error || !decoded) {
-      return res.status(401).send({ error: 'Invalid Token!' })
+    if (!authHeader) {
+      return res.status(401).send({ error: "No token provided!" });
     }
 
-    // req.userId = decoded.sub as string
+    const tokenParts = authHeader.split(" ");
 
-    next()
-  })
+    if (tokenParts.length !== 2) {
+      return res.status(401).send({ error: "Token error!" });
+    }
+
+    const [tokenSchema, token] = tokenParts;
+
+    if (tokenSchema !== "Bearer") {
+      return res.status(401).send({ error: "Token error!" });
+    }
+
+    const { role } = jwt.verify(token, authConfig.secret) as any;
+
+    if (role !== "admin") {
+      return res.status(403).send({ error: "Not authorized" });
+    }
+
+    next();
+  } catch (error) {
+    return res.status(401).send({ error: "Token error!" });
+  }
 }

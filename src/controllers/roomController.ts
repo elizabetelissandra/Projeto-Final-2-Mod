@@ -9,6 +9,7 @@ export class RoomController{
 
     async createRoomController(req: Request, res: Response){
         try{
+
             const {params, file, body} = req
             const inputValidator = yup.object({
               number: yup.number().required(),

@@ -22,7 +22,7 @@ Sprint inicial
 ## Sprint 02 (De 10 a 16/05) 
 Sprint intermediária 01
 ```plaintext
-[ ] Cadastro de quarto - POST /rooms
+[x] Cadastro de quarto - POST /rooms
 [ ] Alterar status quarto - PATCH /rooms/:id
 [ ] Listar todos os quartos - GET /rooms?status=disponível
 [ ] Listar todos os quartos por data- GET /rooms?start_date=04-10-2024&end_date=04-15-2024
