@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { databaseConfig } from "../config/databaseConfig";
 require("dotenv").config()
 
+
 export class Database{
     static async initialize(){
         mongoose.connection.on("open", ()=> {

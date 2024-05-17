@@ -23,8 +23,8 @@ Sprint inicial
 Sprint intermediária 01
 ```plaintext
 [x] Cadastro de quarto - POST /rooms
-[ ] Alterar status quarto - PATCH /rooms/:id
-[ ] Listar todos os quartos - GET /rooms?status=disponível
+[x] Alterar status quarto - PATCH /rooms/:id
+[x] Listar todos os quartos - GET /rooms?status=disponível
 [ ] Listar todos os quartos por data- GET /rooms?start_date=04-10-2024&end_date=04-15-2024
 ```
 

@@ -3,12 +3,11 @@ import { mongoose } from "../database";
 
 
 export interface IRoom {
-  id: ObjectId;
   number: number;
   type: string;
   guest_capacity: number;
   daily_rate: number;
-  photo: "photo";
+  photo: string;
   status: string;
 }
 
@@ -19,6 +18,6 @@ const roomSchema: Schema = new Schema({
   daily_rate: { type: Number },
   photo: { type: String },
   status: { type: String, default: "disponivel" }
-});
+}, { timestamps: true });
 
 export const RoomModel = mongoose.model<IRoom>("Room", roomSchema)
