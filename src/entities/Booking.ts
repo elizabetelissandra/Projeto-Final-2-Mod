@@ -1,6 +1,5 @@
 import { ObjectId } from "mongoose"
 export interface IBooking {
-    id: ObjectId,
     checkin_date: Date,
     checkout_date: Date,
     gests: number,
