@@ -4,7 +4,12 @@ import { ParamsUpdateStatusDTO } from "../dtos/updateStatus";
 import { IRoom, RoomModel } from "../entities/Room";
 import { Room } from "../models/RoomModel";
 
-export class RoomRepository {
+export class roomRepository {
+  async findRoomById(roomId: string): Promise<IRoom | null>{
+    const room = await RoomModel.findOne({_id: roomId});
+    return room;
+  }
+
   async getByNumber(number: number) {
     const roomNumber = await RoomModel.findOne({ number });
     return roomNumber;
@@ -36,6 +41,12 @@ export class RoomRepository {
     const status = await RoomModel.findByIdAndUpdate(id, data, { new: true });
 
     return status;
+  }
+
+  async decrementRoomsAvailable(id: string) {
+    return await RoomModel.findByIdAndUpdate(id, {
+      $inc: { roomsAvailables: -1 }
+    }, { new: true })
   }
 
 }

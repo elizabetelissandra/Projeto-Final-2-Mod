@@ -1,12 +1,11 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { GuestRepository } from "../repositories/guestRepository";
+import { guestRepository } from "../repositories/guestRepository";
 import { InputLoginDTO, OutputLoginDTO } from "../dtos/loginDTO";
 import { ParamsCreateGuestDTO } from "../dtos/createGuestDto";
 
-
 export class GuestService {
-  constructor(private repository: GuestRepository) {}
+  constructor(private repository: guestRepository) {}
 
   async loginGuest(params: InputLoginDTO): Promise<OutputLoginDTO> {
     const guest = await this.repository.getByEmail(params.email);
@@ -47,6 +46,15 @@ export class GuestService {
     };
 
     const guest = await this.repository.createGuest(payload);
-    return guest
+    return guest;
   }
+
+  async listAllUsers(id: string) {
+    const users = await this.repository.getIdbyBookings(id);
+    return users;
+  }
+  async listAll() {
+    return this.repository.listAllUsers();
+  }
+
 }

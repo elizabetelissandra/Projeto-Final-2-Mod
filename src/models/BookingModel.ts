@@ -1,3 +1,4 @@
+
 import { mongoose } from "../database";
 import { IBooking } from "../entities/Booking";
 
@@ -11,11 +12,3 @@ import { IBooking } from "../entities/Booking";
 // - id_guest: Identificador do hóspede que fez a reserva.
 // - status: Status da reserva (por exemplo, "confirmada", "cancelada", "em andamento", "concluída").>
 
-const bookingSchema = new mongoose.Schema<IBooking>({
-    checkin_date: { type: Date, default: Date.now},
-    checkout_date: { type: Date, default: Date.now },
-    gests: {type: Number},
-    id_room: { type: mongoose.Types.ObjectId}
-})
-
-export const Booking = mongoose.model("Booking", bookingSchema);

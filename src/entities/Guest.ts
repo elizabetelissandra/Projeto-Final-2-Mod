@@ -10,15 +10,12 @@ export interface IGuest extends Document {
 }
 
 const guestSchema: Schema = new Schema({
-  name: { type: String },
-  cpf: { type: String },
-  phone_number: { type: Number },
-  email: {
-    type: String,
-    unique: true
-  },
-  password: { type: String },
-  bookings: [{ type: mongoose.Types.ObjectId, ref: "Booking" }]
+  name: { type: String, required: true },
+    cpf: { type: String, required: true },
+    phone_number: { type: String },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    bookings: [{ type: Schema.Types.ObjectId, ref: 'Booking' }]
 }, { timestamps: true });
 
 export const GuestModel = mongoose.model<IGuest>("Guest", guestSchema);

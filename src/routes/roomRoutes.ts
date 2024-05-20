@@ -1,12 +1,12 @@
 import { Request, Response, Router } from "express";
 import { RoomController } from "../controllers/roomController";
-import { RoomRepository } from "../repositories/roomRepository";
+import { roomRepository } from "../repositories/roomRepository";
 import { RoomService } from "../services/RoomService";
 import { adminRepository } from "../repositories/adminRepository";
 import { auth } from "../middlewares/auth";
 import { storageMiddleware } from "../middlewares/storage";
 
-const repository = new RoomRepository
+const repository = new roomRepository
 const service = new RoomService(repository)
 const controller = new RoomController(service)
 const roomRoutes = Router() 

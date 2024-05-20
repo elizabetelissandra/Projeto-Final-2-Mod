@@ -4,5 +4,6 @@ export enum StatusCode {
     NO_CONTENT = 204,
     BAD_REQUEST = 400,
     CONFLICT = 409,
-    SERVER_ERROR = 500
+    SERVER_ERROR = 500,
+    NOT_FOUND = 404
   }

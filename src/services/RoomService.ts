@@ -1,12 +1,12 @@
 import { ParamsCreateRoomDTO, ParamsSearchAndCreateRoomDTO } from "../dtos/createRoomDTO";
-import { RoomRepository } from "../repositories/roomRepository";
+import { roomRepository } from "../repositories/roomRepository";
 import { adminRepository } from "../repositories/adminRepository";
 import { ParamsUpdateStatusDTO } from "../dtos/updateStatus";
 import { IRoom } from "../entities/Room";
 
 
 export class RoomService {
-  constructor(private repository: RoomRepository) {}
+  constructor(private repository: roomRepository) {}
 
   async createRoom(params: ParamsSearchAndCreateRoomDTO) {
 
