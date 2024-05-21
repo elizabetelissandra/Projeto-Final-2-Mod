@@ -14,12 +14,16 @@ const controller = new bookingController(service)
 
 const bookingRoutes = Router()
 
-bookingRoutes.post('/room/:id_room/guest/:id_guest', authenticate, async (req: Request, res: Response) =>{
-    await controller.create(req, res) 
+bookingRoutes.post('/', authenticate, async (req: Request, res: Response) =>{
+    await controller.createBooking(req, res) 
 })
 
 bookingRoutes.get('/', async (req: Request, res: Response) =>{
     await controller.listAllBookingsController(req, res) 
+})
+
+bookingRoutes.patch('/:id',authenticate,async (req: Request, res: Response) =>{
+    await controller.cancelBooking(req, res)
 })
 
 export {bookingRoutes}

@@ -1,3 +1,4 @@
+import { ParamsCancelBookingDTO } from "../dtos/cancelBookingDTO";
 import { ParamsCreateBookingDTO } from "../dtos/createBookingDTO";
 import { IBooking } from "../entities/Booking";
 import { bookingRepository } from "../repositories/bookingRepository";
@@ -14,6 +15,7 @@ export class BookingService {
 
   async createBooking(params: ParamsCreateBookingDTO) {
     const room = await this.rRepository.findRoomById(params.id_room);
+    
 
     if (!room) {
       throw new Error("Room not found");
@@ -27,6 +29,8 @@ export class BookingService {
       params.checkin_date,
       params.checkout_date
     );
+    console.log(conflictingBookings)
+
     if (conflictingBookings.length > 0) {
       throw new Error("Room is already booked");
     }
@@ -42,37 +46,28 @@ export class BookingService {
     return bookings;
   }
 
-  async create(data: ParamsCreateBookingDTO) {
-    const room = await this.rRepository.findRoomById(data.id_room);
-    if (!room) {
-      throw new Error("Room not found");
-    }
-
-    const guest = await this.gRepository.getById(data.id_guest)
-    if (!guest) {
-        throw new Error("Guest not found");
+  async cancelBooking(data: ParamsCancelBookingDTO): Promise<IBooking | null>{
+        const booking = await this.repository.findById(data.id);
+               
+        if (!booking) {
+          throw new Error("Booking not found");
         }
-    if(room.guest_capacity <= 0){
-        throw new Error("Room is full" + StatusCode.BAD_REQUEST)
-    }
-    const payload = {
-        checkin_date: new Date(data.checkin_date),
-        checkout_date: new Date(data.checkout_date),
-        id_room: data.id_room,
-        id_guest: data.id_guest
-    }
 
-    const booking = await this.repository.createBooking(payload)
+        if(booking.id_guest.toString() !== data.id_guest) {
+          throw new Error("You can't cancel this booking")
+        }
 
-    const guestUpdated = await this.gRepository.pushBooking(data.id_guest, data.id_room)
+        if (booking.status === 'em andamento') {
+          throw new Error("Booking is in progress")
+        }
 
-    const decrementedHotel = await this.rRepository.decrementRoomsAvailable(data.id_room)
+        const updatedBooking = await this.repository.updateStatus(data.id, 'cancelada');
+        console.log(updatedBooking)
+        if (!updatedBooking) {
+            throw new Error('Erro ao cancelar a reserva');
+        }
+
+        return updatedBooking
     
-    const result = {
-      ...(booking as any as {_doc: IBooking})._doc,
-      guest: guestUpdated,
-      room: decrementedHotel
-    }
-    return result;
-  }
+};
 }

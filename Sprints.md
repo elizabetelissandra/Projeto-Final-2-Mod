@@ -33,7 +33,7 @@ Sprint intermediária 02
 ```plaintext
 [x] 8. Reservar quarto (ROTA PRIVADA)
 [ ] 9. (OPCIONAL) Listar todas as reservas para o hóspede (ROTA PRIVADA)
-[ ] 10. Cancelar reserva (ROTA PRIVADA)
+[x] 10. Cancelar reserva (ROTA PRIVADA)
 ```
 
 ## Sprint 04 (De 24 a 02/05) 

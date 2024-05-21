@@ -3,7 +3,7 @@ import { StatusCode } from "../utils/statusCodes";
 
 export class bookingRepository {
   async createBooking(params: Partial<IBooking>) {
-    return BookingModel.create(params)
+    return BookingModel.create(params);
   }
 
   async findBookingByDate(
@@ -20,10 +20,21 @@ export class bookingRepository {
     });
   }
   async findById(id: string) {
-    return await BookingModel.findOne({ _id: id });
+    return await BookingModel.findOne({ _id: id }).exec();
+  }
+
+  async findById2(id: string){
+    return await BookingModel.findById(id).exec()
   }
 
   async listAllBookings() {
     return BookingModel.find();
+  }
+
+  async updateStatus(bookingId: string, newStatus: string): Promise<IBooking | null>{
+    return BookingModel.findByIdAndUpdate(bookingId,
+      { $set: { status: newStatus } },
+        { new: true }
+    ).exec();
   }
 }

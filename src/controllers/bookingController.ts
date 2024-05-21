@@ -3,55 +3,45 @@ import * as yup from "yup";
 import { Request, Response } from "express";
 import { StatusCode } from "../utils/statusCodes";
 
-export class bookingController{
-    constructor(private service: BookingService){}
+export class bookingController {
+  constructor(private service: BookingService) {}
 
-    async createBooking(req: Request, res: Response){
-        
+  async createBooking(req: Request, res: Response) {
     try {
-        const { checkin_date, checkout_date, guests, id_room} = req.body
-        const id_guest = req.user.id
-
-        const data = { checkin_date, checkout_date, guests, id_room, id_guest}
-
-        const newBooking = await this.service.createBooking(data)
-        res.status(StatusCode.CREATED).send(newBooking)
+      const { checkin_date, checkout_date, guests, id_room } = req.body;
+      
+      const id_guest = req.user.id;
+      
+      const data = { checkin_date, checkout_date, guests, id_room, id_guest };
+      
+      const newBooking = await this.service.createBooking(data);
+      console.log(newBooking)
+      res.status(StatusCode.CREATED).send(newBooking);
     } catch (error: any) {
-        res.status(StatusCode.BAD_REQUEST).send({message: error.message})
+      res.status(StatusCode.BAD_REQUEST).send({ message: error.message });
     }
-}
+  }
 
-async listAllBookingsController(req: Request, res: Response){
+  async listAllBookingsController(req: Request, res: Response) {
     try {
-        const bookings = await this.service.listAllBookings()
-        res.status(StatusCode.OK).send(bookings)
-        } catch (error: any) {
-            res.status(StatusCode.BAD_REQUEST).send({message: error.message})
-        }
-}
-
-    async create(req: Request, res: Response){
-        const {body, params } = req
-
-        const createBookingValidation = yup.object({
-        checkin_date: yup.string().required(),
-        checkout_date: yup.string().required(),
-        id_guest: yup.string().required(),
-        id_room: yup.string().required(),
-        })
-
-        const payload = {...body, ...params}
-
-        try {
-            await createBookingValidation.validate(payload)
-        } catch (error: any) {
-            return res.status(StatusCode.BAD_REQUEST).send({message: error.message})
-        }
-
-        const result = await this.service.create(payload)
-        if ("error" in result ){
-            return res.status(StatusCode.BAD_REQUEST).send({message: result.error})
-        }
-        return res.status(StatusCode.CREATED).send(result)
+      const bookings = await this.service.listAllBookings();
+      res.status(StatusCode.OK).send(bookings);
+    } catch (error: any) {
+      res.status(StatusCode.BAD_REQUEST).send({ message: error.message });
     }
+  }
+
+  async cancelBooking(req: Request, res: Response) {
+    try {
+      const {id} = req.params;
+      const id_guest = req.user.id;
+
+      const data = {id, id_guest}
+    
+      const updateBooking = await this.service.cancelBooking(data);
+      res.status(StatusCode.OK).send(updateBooking);
+    } catch (error: any) {
+      res.status(StatusCode.SERVER_ERROR).send({ message: error.message });
+    }
+  }
 }
