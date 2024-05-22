@@ -5,8 +5,8 @@ import { IRoom, RoomModel } from "../entities/Room";
 import { Room } from "../models/RoomModel";
 
 export class roomRepository {
-  async findRoomById(roomId: string): Promise<IRoom | null>{
-    const room = await RoomModel.findOne({_id: roomId});
+  async findRoomById(roomId: string): Promise<IRoom | null> {
+    const room = await RoomModel.findOne({ _id: roomId });
     return room;
   }
 
@@ -31,22 +31,14 @@ export class roomRepository {
     return statusRoom;
   }
 
-  async listAllRooms(){
+  async listAllRooms() {
     const allRooms = await RoomModel.find({});
-    console.log("Console do repositorio", allRooms)
+    console.log("Console do repositorio", allRooms);
     return allRooms;
   }
 
-  async editDate(id: string, data: any) {
-    const status = await RoomModel.findByIdAndUpdate(id, data, { new: true });
-
-    return status;
+  async findAllAvaiableRooms():Promise<IRoom[]> {
+    const allRooms = await RoomModel.find({ status: "disponivel" }).exec();
+    return allRooms
   }
-
-  async decrementRoomsAvailable(id: string) {
-    return await RoomModel.findByIdAndUpdate(id, {
-      $inc: { roomsAvailables: -1 }
-    }, { new: true })
-  }
-
 }

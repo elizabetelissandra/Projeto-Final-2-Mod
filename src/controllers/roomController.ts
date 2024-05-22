@@ -75,4 +75,19 @@ export class RoomController {
       res.status(StatusCode.SERVER_ERROR).json({ message: error.message });
     }
   }
+
+  async listAvailableRoomsByDate(req: Request, res: Response){
+    try {
+      const { firstDate, lastDate } = req.query;
+
+      if(!firstDate || !lastDate){
+        return res.status(StatusCode.BAD_REQUEST).send({message: 'Start and end dates are required'})
+      }
+
+      const rooms = await this.service.getAvailableRoomsByDate(new Date(firstDate as string), new Date(lastDate as string))
+      res.status(StatusCode.OK).send(rooms)
+  }catch(error: any){
+    res.status(StatusCode.SERVER_ERROR).send({message: error.message})
+  }
+}
 }

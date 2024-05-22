@@ -26,4 +26,8 @@ bookingRoutes.patch('/:id',authenticate,async (req: Request, res: Response) =>{
     await controller.cancelBooking(req, res)
 })
 
+bookingRoutes.get('/guest', authenticate, async (req: Request, res: Response) =>{
+    await controller.listBookingByGuest(req, res)
+})
+
 export {bookingRoutes}

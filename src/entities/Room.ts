@@ -3,6 +3,7 @@ import { mongoose } from "../database";
 
 
 export interface IRoom {
+  id(id: any): unknown;
   number: number;
   type: string;
   guest_capacity: number;

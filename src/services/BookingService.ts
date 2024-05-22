@@ -15,7 +15,6 @@ export class BookingService {
 
   async createBooking(params: ParamsCreateBookingDTO) {
     const room = await this.rRepository.findRoomById(params.id_room);
-    
 
     if (!room) {
       throw new Error("Room not found");
@@ -24,12 +23,12 @@ export class BookingService {
       throw new Error("Guests number is bigger than room capacity");
     }
 
-    const conflictingBookings = await this.repository.findBookingByDate(
+    const conflictingBookings = await this.repository.findBookingsInDate(
       params.id_room,
       params.checkin_date,
       params.checkout_date
     );
-    console.log(conflictingBookings)
+    console.log(conflictingBookings);
 
     if (conflictingBookings.length > 0) {
       throw new Error("Room is already booked");
@@ -37,7 +36,7 @@ export class BookingService {
 
     const newBooking = await this.repository.createBooking(params);
 
-    await this.gRepository.pushBooking(params.id_guest, newBooking.id)
+    await this.gRepository.pushBooking(params.id_guest, newBooking.id);
     return newBooking;
   }
 
@@ -46,28 +45,35 @@ export class BookingService {
     return bookings;
   }
 
-  async cancelBooking(data: ParamsCancelBookingDTO): Promise<IBooking | null>{
-        const booking = await this.repository.findById(data.id);
-               
-        if (!booking) {
-          throw new Error("Booking not found");
-        }
+  async cancelBooking(data: ParamsCancelBookingDTO): Promise<IBooking | null> {
+    const booking = await this.repository.findById(data.id);
 
-        if(booking.id_guest.toString() !== data.id_guest) {
-          throw new Error("You can't cancel this booking")
-        }
+    if (!booking) {
+      throw new Error("Booking not found");
+    }
 
-        if (booking.status === 'em andamento') {
-          throw new Error("Booking is in progress")
-        }
+    if (booking.id_guest.toString() !== data.id_guest) {
+      throw new Error("You can't cancel this booking");
+    }
 
-        const updatedBooking = await this.repository.updateStatus(data.id, 'cancelada');
-        console.log(updatedBooking)
-        if (!updatedBooking) {
-            throw new Error('Erro ao cancelar a reserva');
-        }
+    if (booking.status === "em andamento") {
+      throw new Error("Booking is in progress");
+    }
 
-        return updatedBooking
-    
-};
+    const updatedBooking = await this.repository.updateStatus(
+      data.id,
+      "cancelada"
+    );
+    console.log(updatedBooking);
+    if (!updatedBooking) {
+      throw new Error("Erro ao cancelar a reserva");
+    }
+
+    return updatedBooking;
+  }
+
+  async getBookingByGuest(guestId: string):Promise<IBooking[]>{
+    return this.repository.findByGuestId(guestId)
+  }
+
 }
