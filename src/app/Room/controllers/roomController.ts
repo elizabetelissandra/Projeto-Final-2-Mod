@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { RoomService } from "../services/RoomService";
 import * as yup from "yup";
 import { StatusCode } from "../../../utils/statusCodes";
+import { createRoomSchema, updateStatusSchema } from "../schema/validateRoom";
 
 export class RoomController {
   constructor(private service: RoomService) {}
@@ -9,18 +10,10 @@ export class RoomController {
   async createRoomController(req: Request, res: Response) {
     try {
       const { params, file, body } = req;
-      const inputValidator = yup.object({
-        number: yup.number().required(),
-        type: yup.string().required(),
-        guest_capacity: yup.number().required(),
-        daily_rate: yup.number().required(),
-        photo: yup.string().required(),
-        status: yup.string()
-      });
 
       const data = { ...params, ...body, photo: file?.filename };
 
-      await inputValidator.validate(data);
+      await createRoomSchema.validate(data);
       const result = await this.service.createRoom(data);
 
       return res.status(StatusCode.CREATED).send(result);
@@ -37,12 +30,8 @@ export class RoomController {
   async updateStatusController(req: Request, res: Response) {
     try {
       const { params, body } = req;
-      const inputValidator = yup.object({
-        id: yup.string().required(),
-        status: yup.string().required()
-      });
       const data = { ...params, ...body };
-      await inputValidator.validate(data);
+      await updateStatusSchema.validate(data);
 
       const result = await this.service.updateStatus(data);
 

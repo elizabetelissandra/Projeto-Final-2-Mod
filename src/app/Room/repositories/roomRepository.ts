@@ -1,6 +1,6 @@
-import { ParamsCreateRoomDTO } from "../../../dtos/createRoomDTO";
-import { InputLoginDTO } from "../../../dtos/loginDTO";
-import { ParamsUpdateStatusDTO } from "../../../dtos/updateStatus";
+import { ParamsCreateRoomDTO } from "../../dtos/createRoomDTO";
+import { InputLoginDTO } from "../../dtos/loginDTO";
+import { ParamsUpdateStatusDTO } from "../../dtos/updateStatus";
 import { IRoom, RoomModel } from "../entities/Room";
 import { Room } from "../../../models/RoomModel";
 

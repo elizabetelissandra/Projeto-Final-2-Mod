@@ -1,5 +1,5 @@
-import { ParamsCancelBookingDTO } from "../../../dtos/cancelBookingDTO";
-import { ParamsCreateBookingDTO } from "../../../dtos/createBookingDTO";
+import { ParamsCancelBookingDTO } from "../../dtos/cancelBookingDTO";
+import { ParamsCreateBookingDTO } from "../../dtos/createBookingDTO";
 import { guestRepository } from "../../Guests/repositories/guestRepository";
 import { roomRepository } from "../../Room/repositories/roomRepository";
 import { IBooking } from "../model/Booking";
