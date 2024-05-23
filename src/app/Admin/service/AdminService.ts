@@ -1,10 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { InputLoginDTO, OutputLoginDTO } from "../dtos/loginDTO";
-import { adminRepository } from "../repositories/adminRepository";
-import { IAdmin } from "../entities/Admin";
-import { AuthMapper, IToApi } from "../utils/mappers/AuthMapper";
-import { authConfig } from "../config/auth";
+import { adminRepository } from "../repository/adminRepository";
+import { InputLoginDTO } from "../../../dtos/loginDTO";
+import { AuthMapper, IToApi } from "../../../utils/mappers/AuthMapper";
+import { authConfig } from "../../../config/auth";
 
 
 

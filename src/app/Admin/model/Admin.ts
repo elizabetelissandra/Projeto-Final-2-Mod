@@ -1,5 +1,5 @@
 import  { Schema, Document } from "mongoose";
-import { mongoose } from "../database";
+import { mongoose } from "../../../database";
 
 export interface IAdmin extends Document {
   email: string;

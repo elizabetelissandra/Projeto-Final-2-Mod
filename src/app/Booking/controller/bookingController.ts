@@ -1,7 +1,9 @@
-import { BookingService } from "../services/BookingService";
+
 import * as yup from "yup";
 import { Request, Response } from "express";
-import { StatusCode } from "../utils/statusCodes";
+import { BookingService } from "../services/bookingService";
+import { StatusCode } from "../../../utils/statusCodes";
+
 
 export class bookingController {
   constructor(private service: BookingService) {}
@@ -55,7 +57,7 @@ export class bookingController {
     } catch (error: any) {
       res
         .status(StatusCode.SERVER_ERROR)
-        .send({ message: "Error listing guest reservations" });
+        .send({ message: "Erro ao listar reservas de hóspedes" });
     }
   }
 }

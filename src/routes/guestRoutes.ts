@@ -1,28 +1,17 @@
 import { Request, Response, Router } from 'express';
-import { GuestController } from '../controllers/guestController';
-import { guestRepository } from '../repositories/guestRepository';
-import { GuestService } from '../services/GuestService';
+import { GuestsModule } from '../app/Guests/guestsModule';
 
-const repository = new guestRepository
-const guestService = new GuestService(repository)
-const guestController = new GuestController(guestService)
+
+const {controller} = GuestsModule.getInstances()
 const guestRoutes = Router()
 
-guestRoutes.post("/", async (req: Request, res: Response) =>{
-    await guestController.createGuestController(req, res)
-})
+guestRoutes.post("/", controller.createGuestController.bind(controller))
 
+guestRoutes.post('/auth', controller.loginController.bind(controller))
 
-guestRoutes.post('/auth', async (req: Request, res: Response) =>{
-    await guestController.loginController(req, res)
-})
+guestRoutes.get('/', controller.listAll.bind(controller))
 
-guestRoutes.get('/', async (req: Request, res: Response) =>{
-    await guestController.listAll(req, res)
-})
-
-guestRoutes.get('/:id', async (req: Request, res: Response) =>{
-    await guestController.guestWithBookingsController(req, res)
-})
+guestRoutes.get('/:id', controller.guestWithBookingsController.bind(controller)
+)
 
 export {guestRoutes}

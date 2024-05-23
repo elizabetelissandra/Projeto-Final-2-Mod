@@ -1,6 +1,4 @@
-import { ParamsfindBookingDate } from "../dtos/findBookinginDate";
-import { BookingModel, IBooking } from "../entities/Booking";
-import { StatusCode } from "../utils/statusCodes";
+import { BookingModel, IBooking } from "../model/Booking";
 
 export class bookingRepository {
   async createBooking(params: Partial<IBooking>) {
@@ -48,7 +46,7 @@ export class bookingRepository {
       ]
     }).exec();
 
-    return bookings.map((booking) => booking.id_room.toString());
+    return bookings.map((booking: any) => booking.id_room.toString());
   }
 
   async findByGuestId(guestId: string): Promise<IBooking[]>{

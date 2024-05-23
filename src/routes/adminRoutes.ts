@@ -1,21 +1,11 @@
 import {Request, Response, Router} from "express"
+import { AdminModule } from "../app/Admin/AdminModule"
 
-import { adminRepository } from "../repositories/adminRepository"
-import { adminController } from "../controllers/adminController"
-import { AdminService } from "../services/AdminService"
-import { auth } from "../middlewares/auth"
-
-const repository = new adminRepository
-const service = new AdminService(repository)
-const controller = new adminController(service)
 const adminRoutes = Router()
+const {controller} = AdminModule.getInstances()
 
-adminRoutes.post("/", async (req: Request, res: Response) =>{
-    await controller.createAdminController(req, res)
-})
+adminRoutes.post("/", controller.createAdminController.bind(controller))
 
-adminRoutes.post("/auth", async (req: Request, res: Response) =>{
-    await controller.loginController(req, res)
-})
+adminRoutes.post("/auth", controller.loginController.bind(controller))
 
 export { adminRoutes }

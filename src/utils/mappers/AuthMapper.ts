@@ -1,4 +1,5 @@
-import { IAdmin } from "../../entities/Admin"
+import { IAdmin } from "../../app/Admin/model/Admin"
+
 
 type IToApi =  IAdmin & { _id: string }
 

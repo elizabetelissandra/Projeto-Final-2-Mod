@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { RoomService } from "../services/RoomService";
 import * as yup from "yup";
-import { StatusCode } from "../utils/statusCodes";
+import { StatusCode } from "../../../utils/statusCodes";
 
 export class RoomController {
   constructor(private service: RoomService) {}
@@ -69,7 +69,6 @@ export class RoomController {
   async listAllRoomsController(req: Request, res: Response) {
     try {
       const rooms = await this.service.listAllRooms();
-      console.log("console do controller", rooms)
       res.status(StatusCode.OK).json(rooms);
     } catch (error: any) {
       res.status(StatusCode.SERVER_ERROR).json({ message: error.message });
@@ -81,7 +80,7 @@ export class RoomController {
       const { firstDate, lastDate } = req.query;
 
       if(!firstDate || !lastDate){
-        return res.status(StatusCode.BAD_REQUEST).send({message: 'Start and end dates are required'})
+        return res.status(StatusCode.BAD_REQUEST).send({message: 'As datas de início e término são obrigatórias'})
       }
 
       const rooms = await this.service.getAvailableRoomsByDate(new Date(firstDate as string), new Date(lastDate as string))

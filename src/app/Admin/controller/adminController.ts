@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import * as yup from "yup";
 
-import { StatusCode } from "../utils/statusCodes";
-import { AdminService } from "../services/AdminService";
-import { adminRepository } from "../repositories/adminRepository";
+import { StatusCode } from "../../../utils/statusCodes";
+import { AdminService } from "../service/AdminService";
+import { adminRepository } from "../repository/adminRepository";
 
 const Repository = new adminRepository();
 const service = new AdminService(Repository);

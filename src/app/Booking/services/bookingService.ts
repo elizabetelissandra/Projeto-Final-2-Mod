@@ -1,10 +1,10 @@
-import { ParamsCancelBookingDTO } from "../dtos/cancelBookingDTO";
-import { ParamsCreateBookingDTO } from "../dtos/createBookingDTO";
-import { IBooking } from "../entities/Booking";
+import { ParamsCancelBookingDTO } from "../../../dtos/cancelBookingDTO";
+import { ParamsCreateBookingDTO } from "../../../dtos/createBookingDTO";
+import { guestRepository } from "../../Guests/repositories/guestRepository";
+import { roomRepository } from "../../Room/repositories/roomRepository";
+import { IBooking } from "../model/Booking";
 import { bookingRepository } from "../repositories/bookingRepository";
-import { guestRepository } from "../repositories/guestRepository";
-import { roomRepository } from "../repositories/roomRepository";
-import { StatusCode } from "../utils/statusCodes";
+
 
 export class BookingService {
   constructor(

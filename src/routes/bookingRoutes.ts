@@ -1,33 +1,28 @@
-import {Request, Response, Router} from "express"
-import { bookingController } from "../controllers/bookingController";
-import { BookingService } from "../services/BookingService";
-import { bookingRepository } from "../repositories/bookingRepository";
-import { roomRepository} from "../repositories/roomRepository";
+import { Request, Response, Router } from "express";
 import { authenticate } from "../middlewares/authentication";
-import { guestRepository } from "../repositories/guestRepository";
+import { BookingModule } from "../app/Booking/bookingModule";
 
-const guestRepo = new guestRepository
-const repository = new bookingRepository
-const roomReposi = new roomRepository
-const service = new BookingService(repository, roomReposi, guestRepo)
-const controller = new bookingController(service)
+const { controller } = BookingModule.getInstances();
+const bookingRoutes = Router();
 
-const bookingRoutes = Router()
+bookingRoutes.post(
+  "/",
+  authenticate,
+  controller.createBooking.bind(controller)
+);
 
-bookingRoutes.post('/', authenticate, async (req: Request, res: Response) =>{
-    await controller.createBooking(req, res) 
-})
+bookingRoutes.get("/", controller.listAllBookingsController.bind(controller));
 
-bookingRoutes.get('/', async (req: Request, res: Response) =>{
-    await controller.listAllBookingsController(req, res) 
-})
+bookingRoutes.patch(
+  "/:id",
+  authenticate,
+  controller.cancelBooking.bind(controller)
+);
 
-bookingRoutes.patch('/:id',authenticate,async (req: Request, res: Response) =>{
-    await controller.cancelBooking(req, res)
-})
+bookingRoutes.get(
+  "/guest",
+  authenticate,
+  controller.listBookingByGuest.bind(controller)
+);
 
-bookingRoutes.get('/guest', authenticate, async (req: Request, res: Response) =>{
-    await controller.listBookingByGuest(req, res)
-})
-
-export {bookingRoutes}
+export { bookingRoutes };

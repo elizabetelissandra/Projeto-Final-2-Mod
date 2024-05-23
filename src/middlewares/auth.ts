@@ -1,7 +1,6 @@
 import { type Request, type Response, type NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { authConfig } from "../config/auth";
-import { AdminModel } from "../entities/Admin";
 
 type JwtPayload = {
   id: string;

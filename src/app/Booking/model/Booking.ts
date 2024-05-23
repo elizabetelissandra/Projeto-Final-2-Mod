@@ -1,5 +1,5 @@
 import { Document } from "mongoose";
-import { mongoose } from "../database";
+import { mongoose } from "../../../database";
 
 export interface IBooking extends Document{
     checkin_date: Date,

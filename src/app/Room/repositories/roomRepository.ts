@@ -1,8 +1,8 @@
-import { ParamsCreateRoomDTO } from "../dtos/createRoomDTO";
-import { InputLoginDTO } from "../dtos/loginDTO";
-import { ParamsUpdateStatusDTO } from "../dtos/updateStatus";
+import { ParamsCreateRoomDTO } from "../../../dtos/createRoomDTO";
+import { InputLoginDTO } from "../../../dtos/loginDTO";
+import { ParamsUpdateStatusDTO } from "../../../dtos/updateStatus";
 import { IRoom, RoomModel } from "../entities/Room";
-import { Room } from "../models/RoomModel";
+import { Room } from "../../../models/RoomModel";
 
 export class roomRepository {
   async findRoomById(roomId: string): Promise<IRoom | null> {
@@ -33,7 +33,6 @@ export class roomRepository {
 
   async listAllRooms() {
     const allRooms = await RoomModel.find({});
-    console.log("Console do repositorio", allRooms);
     return allRooms;
   }
 

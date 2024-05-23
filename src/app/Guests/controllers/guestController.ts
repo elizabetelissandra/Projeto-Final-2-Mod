@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import * as yup from "yup";
-import { StatusCode } from "../utils/statusCodes";
+import { StatusCode } from "../../../utils/statusCodes";
 import { GuestService } from "../services/GuestService";
 
 export class GuestController {

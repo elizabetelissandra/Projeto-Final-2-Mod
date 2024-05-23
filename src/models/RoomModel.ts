@@ -1,5 +1,5 @@
 import { mongoose } from "../database";
-import { IRoom } from "../entities/Room";
+import { IRoom } from "../app/Guests/entities/Room";
 
 const roomSchema = new mongoose.Schema<IRoom>({
   number: { Type: Number, required: true },

@@ -1,9 +1,8 @@
-import { ParamsCreateRoomDTO, ParamsSearchAndCreateRoomDTO } from "../dtos/createRoomDTO";
+import { ParamsCreateRoomDTO, ParamsSearchAndCreateRoomDTO } from "../../../dtos/createRoomDTO";
 import { roomRepository } from "../repositories/roomRepository";
-import { adminRepository } from "../repositories/adminRepository";
-import { ParamsUpdateStatusDTO } from "../dtos/updateStatus";
+import { ParamsUpdateStatusDTO } from "../../../dtos/updateStatus";
 import { IRoom } from "../entities/Room";
-import { bookingRepository } from "../repositories/bookingRepository";
+import { bookingRepository } from "../../Booking/repositories/bookingRepository";
 
 
 export class RoomService {
@@ -34,7 +33,6 @@ export class RoomService {
 
   async listAllRooms(){
     const rooms = await this.repository.listAllRooms()
-    console.log("Console do service", rooms)
     return rooms
   }
 
