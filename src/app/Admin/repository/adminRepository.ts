@@ -1,4 +1,4 @@
-import { InputLoginDTO } from "../../dtos/loginDTO"
+import { InputLoginDTO } from "../../Guests/dtos/loginGuestDTO"
 import { AdminModel, IAdmin } from "../model/Admin"
 
 

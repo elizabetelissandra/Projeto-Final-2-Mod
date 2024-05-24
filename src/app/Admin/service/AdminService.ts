@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { adminRepository } from "../repository/adminRepository";
-import { InputLoginDTO } from "../../dtos/loginDTO";
+import { InputLoginDTO } from "../../Admin/dtos/loginAdminDTO";
 import { AuthMapper, IToApi } from "../../../utils/mappers/AuthMapper";
 import { authConfig } from "../../../config/auth";
 

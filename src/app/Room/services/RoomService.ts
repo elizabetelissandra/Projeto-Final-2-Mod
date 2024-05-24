@@ -1,6 +1,6 @@
-import { ParamsCreateRoomDTO, ParamsSearchAndCreateRoomDTO } from "../../dtos/createRoomDTO";
+import { ParamsCreateRoomDTO, ParamsSearchAndCreateRoomDTO } from "../dtos/createRoomDTO";
 import { roomRepository } from "../repositories/roomRepository";
-import { ParamsUpdateStatusDTO } from "../../dtos/updateStatus";
+import { ParamsUpdateStatusDTO } from "../dtos/updateStatus";
 import { IRoom } from "../entities/Room";
 import { bookingRepository } from "../../Booking/repositories/bookingRepository";
 

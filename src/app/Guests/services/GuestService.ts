@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { guestRepository } from "../repositories/guestRepository";
-import { InputLoginDTO, OutputLoginDTO } from "../../dtos/loginDTO";
-import { ParamsCreateGuestDTO } from "../../dtos/createGuestDto";
+import { InputLoginDTO, OutputLoginDTO } from "../dtos/loginGuestDTO";
+import { ParamsCreateGuestDTO } from "../dtos/createGuestDto";
 
 export class GuestService {
   constructor(private repository: guestRepository) {}

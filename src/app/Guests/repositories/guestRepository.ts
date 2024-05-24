@@ -1,4 +1,4 @@
-import { ParamsCreateGuestDTO } from "../../dtos/createGuestDto";
+import { ParamsCreateGuestDTO } from "../dtos/createGuestDto";
 import { GuestModel, IGuest } from "../entities/Guest";
 
 export class guestRepository {
