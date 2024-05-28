@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
 import * as yup from 'yup'
-
 import { StatusCode } from '../../../utils/statusCodes'
 import { AdminService } from '../service/AdminService'
 import { adminRepository } from '../repository/adminRepository'
@@ -15,8 +14,7 @@ export class adminController {
   async loginController(req: Request, res: Response) {
     try {
       const { body } = req
-      const bodyValidator = loginAdminSchema
-      await bodyValidator.validate(body)
+      await loginAdminSchema.validate(body)
       const result = await service.loginAdmin(body)
       return res.status(StatusCode.OK).send(result)
     } catch (error: any) {
@@ -27,8 +25,8 @@ export class adminController {
   async createAdminController(req: Request, res: Response) {
     try {
       const { body } = req
-      const bodyValidator = creatAdminSchema
-      await bodyValidator.validate(body)
+      
+      await creatAdminSchema.validate(body)
 
       const result = await service.registerAdmin(body.email, body.password)
 

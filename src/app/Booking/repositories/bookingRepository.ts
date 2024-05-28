@@ -46,7 +46,8 @@ export class bookingRepository {
       ]
     }).exec();
 
-    return bookings.map((booking: any) => booking.id_room.toString());
+    const roomId = bookings.map((booking: any) => booking.id_room.toString());
+    return Array.from(new Set(roomId))
   }
 
   async findByGuestId(guestId: string): Promise<IBooking[]>{

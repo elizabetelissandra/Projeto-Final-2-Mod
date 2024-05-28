@@ -17,10 +17,10 @@ export class BookingService {
     const room = await this.rRepository.findRoomById(params.id_room);
 
     if (!room) {
-      throw new Error("Room not found");
+      throw new Error("Quarto não achado!");
     }
     if (params.guests > room.guest_capacity) {
-      throw new Error("Guests number is bigger than room capacity");
+      throw new Error("O número de hóspedes é maior que a capacidade do quarto");
     }
 
     const conflictingBookings = await this.repository.findBookingsInDate(
@@ -31,7 +31,7 @@ export class BookingService {
     console.log(conflictingBookings);
 
     if (conflictingBookings.length > 0) {
-      throw new Error("Room is already booked");
+      throw new Error("O quarto já está reservado");
     }
 
     const newBooking = await this.repository.createBooking(params);
@@ -49,15 +49,15 @@ export class BookingService {
     const booking = await this.repository.findById(data.id);
 
     if (!booking) {
-      throw new Error("Booking not found");
+      throw new Error("Reserva não encontrada");
     }
 
     if (booking.id_guest.toString() !== data.id_guest) {
-      throw new Error("You can't cancel this booking");
+      throw new Error("Você não pode cancelar essa reserva!");
     }
 
     if (booking.status === "em andamento") {
-      throw new Error("Booking is in progress");
+      throw new Error("Reserva em andamento");
     }
 
     const updatedBooking = await this.repository.updateStatus(

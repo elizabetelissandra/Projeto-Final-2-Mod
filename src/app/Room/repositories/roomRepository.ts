@@ -2,7 +2,7 @@ import { ParamsCreateRoomDTO } from "../dtos/createRoomDTO";
 import { InputLoginDTO } from "../../Guests/dtos/loginGuestDTO";
 import { ParamsUpdateStatusDTO } from "../dtos/updateStatus";
 import { IRoom, RoomModel } from "../entities/Room";
-import { Room } from "../../../models/RoomModel";
+
 
 export class roomRepository {
   async findRoomById(roomId: string): Promise<IRoom | null> {
