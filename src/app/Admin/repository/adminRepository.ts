@@ -12,6 +12,10 @@ export class adminRepository{
         return await AdminModel.findOne({email})
     }
 
+    async getByPassword(senha: string){
+        return await AdminModel.findOne({senha})
+    }
+
     async getById(id: string): Promise<IAdmin | null>{
         const admin = await AdminModel.findById(id)
         return admin

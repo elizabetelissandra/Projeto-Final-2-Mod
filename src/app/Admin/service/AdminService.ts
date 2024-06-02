@@ -16,10 +16,8 @@ export class AdminService {
       throw new Error("Email ou senha incorretos");
     }
 
-    const passwordValid = await bcrypt.compare(
-      params.password,
-      admin.password as string
-    );
+    const passwordValid = await this.repository.getByPassword(params.password)
+    
     if (!passwordValid) {
       throw new Error("Email ou senha incorretos");
     }
