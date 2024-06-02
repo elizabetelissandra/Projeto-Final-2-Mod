@@ -20,21 +20,4 @@ export class adminController {
       return res.status(StatusCode.BAD_REQUEST).send({ message: error.message })
     }
   }
-
-  async createAdminController(req: Request, res: Response) {
-    try {
-      const { body } = req
-      
-      await creatAdminSchema.validate(body)
-
-      const result = await service.registerAdmin(body.email, body.password)
-
-      return res.status(StatusCode.CREATED).send(result)
-    } catch (error: any) {
-      if (error.message === 'Gerente já existe') {
-        return res.status(StatusCode.CONFLICT).send({ message: error.message })
-      }
-      return res.status(StatusCode.BAD_REQUEST).send({ message: error.message })
-    }
-  }
 }

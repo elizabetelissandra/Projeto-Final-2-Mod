@@ -3,17 +3,12 @@ import { AdminModel, IAdmin } from "../model/Admin"
 
 
 export class adminRepository{
-    async createAdmin(input: InputLoginDTO): Promise<IAdmin | null>{
-        return await AdminModel.create(input)
-        
-    }
-
-    async getByEmail(email: string): Promise<IAdmin | null>{
+    async getByEmail(email: string){
         return await AdminModel.findOne({email})
     }
 
-    async getByPassword(senha: string){
-        return await AdminModel.findOne({senha})
+    async getByPassword(password: string){
+        return await AdminModel.findOne({password})
     }
 
     async getById(id: string): Promise<IAdmin | null>{

@@ -12,12 +12,13 @@ export class AdminService {
 
   async loginAdmin(params: InputLoginDTO){
     const admin = await this.repository.getByEmail(params.email);
+    console.log(admin)
     if (!admin) {
       throw new Error("Email ou senha incorretos");
     }
 
     const passwordValid = await this.repository.getByPassword(params.password)
-    
+    console.log(passwordValid)
     if (!passwordValid) {
       throw new Error("Email ou senha incorretos");
     }
@@ -29,19 +30,5 @@ export class AdminService {
     const token = jwt.sign(payload, secretKey, options)
 
     return {token, IAdmin: AuthMapper.toApi(admin as any as IToApi)}
-  }
-
-  async registerAdmin(email: string, password: string){
-    const existingAdmin = await this.repository.getByEmail(email)
-    if(existingAdmin){
-      throw new Error('Email já cadastrado como gerente')
-    }
-  
-    const hashedPassword = await bcrypt.hash(password, 8)
-
-    const admin = this.repository.createAdmin({email, password: hashedPassword})
-  
-    return admin
-
   }
 }
