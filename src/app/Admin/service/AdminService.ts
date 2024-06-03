@@ -2,8 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { adminRepository } from "../repository/adminRepository";
 import { InputLoginDTO } from "../../Admin/dtos/loginAdminDTO";
-import { AuthMapper, IToApi } from "../../../utils/mappers/AuthMapper";
-import { authConfig } from "../../../config/auth";
+
 
 
 
@@ -17,7 +16,7 @@ export class AdminService {
     }
 
     const passwordValid = await this.repository.getByPassword(params.password)
-    console.log(passwordValid)
+
     if (!passwordValid) {
       throw new Error("Email ou senha incorretos");
     }
