@@ -22,12 +22,14 @@ export class AdminService {
       throw new Error("Email ou senha incorretos");
     }
 
-    const payload = {...AuthMapper.toApi(admin as any as IToApi)}
-    const secretKey = authConfig.secret
-    const options = {expiresIn: '1h'}
+    const token = jwt.sign(
+      {
+        id: admin._id,
+        email: admin.email,
+        role: 'admin'
+      }, 
+      process.env.SECRET_KEY as string, {expiresIn: '1h'})
 
-    const token = jwt.sign(payload, secretKey, options)
-
-    return {token, IAdmin: AuthMapper.toApi(admin as any as IToApi)}
+    return { token }
   }
 }
