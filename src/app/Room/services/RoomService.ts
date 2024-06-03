@@ -26,8 +26,8 @@ export class RoomService {
     return status
   }
 
-  async findRoomByStatus(status: string){
-    const rooms = await this.repository.findRoomByStatus(status)
+  async findRoomByStatus(){
+    const rooms = await this.repository.findAllAvaiableRooms()
     return rooms
   }
 

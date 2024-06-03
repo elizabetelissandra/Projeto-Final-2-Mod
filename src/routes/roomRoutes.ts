@@ -8,7 +8,7 @@ import { RoomModule } from "../app/Room/roomModule";
 const {controller} = RoomModule.getInstances()
 const roomRoutes = Router() 
 
-roomRoutes.post('/',auth, storageMiddleware.single("photo") , controller.createRoomController.bind(controller))
+roomRoutes.post('/', auth, storageMiddleware.single("photo") , controller.createRoomController.bind(controller))
 
 roomRoutes.patch('/:id', auth, controller.updateStatusController.bind(controller))
 

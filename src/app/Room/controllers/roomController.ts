@@ -43,8 +43,7 @@ export class RoomController {
 
   async findRoomByStatusController(req: Request, res: Response) {
     try {
-      const status = req.query.status as string
-      const rooms = await this.service.findRoomByStatus(status)
+      const rooms = await this.service.findRoomByStatus()
       res.status(StatusCode.OK).send(rooms)
     } catch (error: any) {
       res.status(StatusCode.SERVER_ERROR).send({ message: error.message })

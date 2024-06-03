@@ -28,7 +28,6 @@ export class BookingService {
       params.checkin_date,
       params.checkout_date
     );
-    console.log(conflictingBookings);
 
     if (conflictingBookings.length > 0) {
       throw new Error("O quarto já está reservado");
@@ -40,8 +39,8 @@ export class BookingService {
     return newBooking;
   }
 
-  async listAllBookings() {
-    const bookings = await this.repository.listAllBookings();
+  async listAllBookings(guestId: string) {
+    const bookings = await this.repository.listAllBookings(guestId);
     return bookings;
   }
 
@@ -64,7 +63,7 @@ export class BookingService {
       data.id,
       "cancelada"
     );
-    console.log(updatedBooking);
+    
     if (!updatedBooking) {
       throw new Error("Erro ao cancelar a reserva");
     }

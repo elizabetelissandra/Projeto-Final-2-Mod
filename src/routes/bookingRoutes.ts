@@ -11,7 +11,7 @@ bookingRoutes.post(
   controller.createBooking.bind(controller)
 );
 
-bookingRoutes.get("/", controller.listAllBookingsController.bind(controller));
+bookingRoutes.get("/",authenticate, controller.listAllBookingsController.bind(controller));
 
 bookingRoutes.patch(
   "/:id",

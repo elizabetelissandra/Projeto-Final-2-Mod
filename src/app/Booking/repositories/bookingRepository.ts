@@ -8,8 +8,8 @@ export class bookingRepository {
     return await BookingModel.findOne({ _id: id }).exec();
   }
 
-  async listAllBookings() {
-    return BookingModel.find();
+  async listAllBookings(guestId: string) {
+    return BookingModel.find({id_guest: guestId}).exec();
   }
 
   async updateStatus(

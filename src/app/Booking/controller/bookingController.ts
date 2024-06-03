@@ -27,7 +27,8 @@ export class bookingController {
 
   async listAllBookingsController(req: Request, res: Response) {
     try {
-      const bookings = await this.service.listAllBookings()
+      const id_guest = req.user.id
+      const bookings = await this.service.listAllBookings(id_guest)
       res.status(StatusCode.OK).send(bookings)
     } catch (error: any) {
       res.status(StatusCode.BAD_REQUEST).send({ message: error.message })

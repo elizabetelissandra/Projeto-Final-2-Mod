@@ -12,7 +12,6 @@ export class AdminService {
 
   async loginAdmin(params: InputLoginDTO){
     const admin = await this.repository.getByEmail(params.email);
-    console.log(admin)
     if (!admin) {
       throw new Error("Email ou senha incorretos");
     }
